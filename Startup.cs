@@ -11,12 +11,14 @@ namespace MvcMovie
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IWebHostEnvironment HostingEnvironment { get; }
+
+        private IConfiguration Configuration { get; set; }
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
             Configuration = configuration;
+            HostingEnvironment = env;
         }
-
-        public IConfiguration Configuration { get; }
 
 #if NotSQLite
         #region snippet_ConfigureServices
@@ -32,8 +34,13 @@ namespace MvcMovie
         #region snippet_UseSqlite
         public void ConfigureServices(IServiceCollection services)
         {
+            Configuration = new ConfigurationBuilder()
+              .SetBasePath(HostingEnvironment.ContentRootPath)
+              .AddJsonFile("appsettings_SQLite.json", true, true)
+              .AddEnvironmentVariables()
+              .Build();
             services.AddControllersWithViews();
-            
+
             services.AddDbContext<MvcMovieContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("MvcMovieContext")));
         }
@@ -70,7 +77,7 @@ namespace MvcMovie
 #if NotSQLite
             Console.WriteLine("use NotSQLLite");
 #else
-             Console.WriteLine("Not use NotSQLLite");
+            Console.WriteLine("Not use NotSQLLite");
 #endif
 
         }
