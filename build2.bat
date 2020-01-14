@@ -1,0 +1,1 @@
+dotnet build /p:NotSQLite=false MvcMovie.csproj
