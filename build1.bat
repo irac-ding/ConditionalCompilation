@@ -1,1 +1,1 @@
-dotnet build /p:NotSQLite=true MvcMovie.csproj
+ dotnet build /p:DefineConstants="NotSQLite" MvcMovie.csproj

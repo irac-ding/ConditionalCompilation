@@ -1,1 +1,1 @@
-dotnet build /p:NotSQLite=false MvcMovie.csproj
+ dotnet build MvcMovie.csproj

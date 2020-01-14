@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  <DefineConstants Condition=" '$(NotSQLite)' == 'true' ">$(DefineConstants);NotSQLite</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
